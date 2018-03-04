@@ -23,7 +23,7 @@ public:
         root->left = tail;
         if (tail)  // 注意判断是否为空!
             tail->right = root;
-        // 现在左子树和根节点都已转换好
+        // 现在左子树和根节点都已转换好，根节点成了新的尾结点!!!
         tail = root;
         if (root->right)
             convert_imp(root->right, tail);
