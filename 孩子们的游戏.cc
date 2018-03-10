@@ -16,6 +16,8 @@ public:
     // 因此设f(n,m)为n个数字的序列中最后剩下的数字，则
     // f(n-1,m)可以看成0..n-1中剔除k后的新ID，因此有
     // f(n,m) = oldid = (f(n-1,m) + k + 1) % n，f(1,m)=0
+    // 其中k为0..n-1中剔除的序号，即(m - 1) % n
+    // 所以f(n,m) = (f(n-1,m) + m) % n
     int LastRemaining_Solution(int n, int m)  // n>1,m>=1
     {
         if (n <= 0 || m <= 0)
