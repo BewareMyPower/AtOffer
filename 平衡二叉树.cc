@@ -3,7 +3,31 @@
  */
 class Solution {
 public:
-    // 若树不平衡则返回false，否则返回true，并记录树到叶子节点的深度depth
+    using Node = TreeNode;
+    
+    // 若root为平衡二叉树，则返回较大的子树深度，否则返回-1
+    int balanced_depth(Node* root) {
+        if (!root)
+            return 0;
+        int dL, dR;  // 左右子树的深度
+        if ((dL = balanced_depth(root->left)) == -1)
+            return -1;
+        if ((dR = balanced_depth(root->right)) == -1)
+            return -1;
+        if (dL < dR)
+            swap(dL, dR);
+        if (dL - dR > 1)
+            return -1;
+        // 此时左右子树均为平衡树，返回较大的子树深度
+        return dL + 1;
+    }
+    
+	// 利用错误码的方法简化调用的函数
+    bool IsBalanced_Solution(TreeNode* root) {
+        return balanced_depth(root) != -1;
+    }
+
+/*    // 若树不平衡则返回false，否则返回true，并记录树到叶子节点的深度depth
     bool IsBalanced(TreeNode* root, int& depth) {
         if (!root) {
             depth = 0;
@@ -26,5 +50,5 @@ public:
     bool IsBalanced_Solution(TreeNode* pRoot) {
         int depth = 0;
         return IsBalanced(pRoot, depth);
-    }
+    }*/
 };
