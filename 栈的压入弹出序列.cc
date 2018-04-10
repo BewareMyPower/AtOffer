@@ -9,24 +9,21 @@ class Solution {
 public:
     // 思路: 建立辅助栈stk模拟真实的出栈情况
     bool IsPopOrder(vector<int> pushV,vector<int> popV) {
-        // 假设序列不包含重复元素!!!
         int n = pushV.size();
-        if (n == 0 || n != (int)popV.size())
+        if (n != popV.size())
             return false;
         
-        vector<int> stk;
-        for (int i = 0, j = 0; i < n; ) {  // popV[j]为当前弹出元素
-            stk.push_back(pushV[i++]);
-            // 按照popV的顺序依次出栈
-            while (j < n && !stk.empty() && stk.back() == popV[j]) {
-                j++;
-                stk.pop_back();
+        stack<int> stk;
+        int j = 0;  // popV[k]
+        for (int i = 0; i < n; ++i) {
+            stk.push(pushV[i]);
+            while (!stk.empty() && stk.top() == popV[j]) {
+                stk.pop();
+                ++j;
             }
         }
-        
         return stk.empty();
     }
-
 	/*
     int findVal(int x, const vector<int>& v, int n) {
         for (int i = 0; i < n; ++i) {
