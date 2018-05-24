@@ -1,3 +1,4 @@
+// 33ms 80.20%
 class Solution {
 public:
     string convert(string s, int numRows) {
@@ -12,15 +13,12 @@ public:
             res.push_back(s[i]);
         // 中间numRows-2行，每一组字符包含2个字符
         for (int row = 1; row + 1 < numRows; ++row) {
-            int i1 = row;
-            int i2 = numGroup - row;
-            while (i1 < len) {
-                res.push_back(s[i1]);
-                if (i2 >= len)
+            int diff = numGroup - row - row;
+            for (int i = row; i < len; i += numGroup) {
+                res.push_back(s[i]);
+                if (i + diff >= len)
                     break;
-                res.push_back(s[i2]);
-                i1 += numGroup;
-                i2 += numGroup;
+                res.push_back(s[i + diff]);
             }
         }
         // 最后1行，每一组字符只包含1个字符
