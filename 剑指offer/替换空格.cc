@@ -5,7 +5,26 @@
  */
 class Solution {
 public:
+	// 就地改变，由于字符串变长，所以采用copy_backward的方式(从后到前)
 	void replaceSpace(char *str,int length) {
+        int nBlank = 0;
+        for (int i = 0; i < length; ++i)
+            if (str[i] == ' ')
+                ++nBlank;
+        int newlength = length + nBlank * 2;
+        char* p = str + newlength;
+        for (char* q = str + length; p >= str; --q) {
+            if (*q != ' ') {
+                *p-- = *q;
+            } else {
+                *p-- = '0';
+                *p-- = '2';
+                *p-- = '%';
+            }
+        }
+	}
+	
+/*	void replaceSpace(char *str,int length) {
         // 计算空格数
         int nSpace = 0;
         for (int i = 0; i < length; i++) {
@@ -26,5 +45,5 @@ public:
                 j += 3;
             }
         }
-	}
+	}*/
 };

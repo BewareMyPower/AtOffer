@@ -3,15 +3,14 @@
  */
 class Solution {
 public:  // 动态规划 f(n) = f(n-1) + f(n-2)
-    int jumpFloor(int number) {
-        if (number <= 0)
-            return 0;
-        int a[2] = {1, 2};
-        int n = number;
-        if (n <= 2)
-            return a[n - 1];
-        for (int i = 3; i <= n; i++)
-            a[(i+1) % 2] = a[0] + a[1];
-        return a[(n + 1) % 2];
+    int jumpFloor(int n) {  // 测试用例中n>0
+        if (n == 1) return 1;
+        int a[2] = {1, 2};  // 不同于斐波拉契数列初始值
+        for (int i = 3; i <= n; ++i) {
+            int temp = a[0] + a[1];
+            a[0] = a[1];
+            a[1] = temp;
+        }
+        return a[1];
     }
 };

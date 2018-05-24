@@ -11,26 +11,24 @@
 // 特殊情况: a[l] == a[m] == a[k]，无法判断，只能顺序查找
 class Solution {
 public:
-    int minNumberInRotateArray(vector<int> rotateArray) {
-        auto& a = rotateArray;
+    int minNumberInRotateArray(vector<int> a) {
         int n = a.size();
-        if (n == 0)
-            return 0;
+        if (n == 0) return 0;
         
-        int l = 0;
-        int h = n - 1;
-        while (true) {
-            if (h - l <= 1)
-                return a[h];
+        int low = 0, high = n - 1;  // a[low] >= a[high] >= x
+        while (low < high) {
+            if (high - low == 1)  // 注意没有此判断可能无限循环!
+                return min(a[low], a[high]);
+
+            int mid = (low + high) / 2;
+            if (a[mid] == a[low] && a[mid] == a[high])
+                return *min_element(a.begin(), a.end()); // 只能顺序查找
             
-            int m = (l + h) / 2;
-            if (a[l] == a[m] == a[h])
-                return *std::min_element(a.cbegin() + l, a.cbegin() + h + 1);
-            
-            if (a[m] <= a[l])
-                h = m;
-            else
-                l = m;
+            if (a[mid] <= a[high])
+                high = mid;
+            else  // a[low] <= a[mid]
+                low = mid;
         }
+        return a[low];
     }
 };

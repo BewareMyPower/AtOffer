@@ -12,7 +12,20 @@
 */
 class Solution {
 public:
+    // 递归打印
+    void saveListFromTailToHead(ListNode* head, vector<int>& v) {
+        if (!head) return;
+        saveListFromTailToHead(head->next, v);
+        v.push_back(head->val);
+    }
+
     vector<int> printListFromTailToHead(ListNode* head) {
+        vector<int> v;
+        saveListFromTailToHead(head, v);
+        return v;
+    }
+	
+/*    vector<int> printListFromTailToHead(ListNode* head) {
         vector<int> v;
         while (head) {
             v.push_back(head->val);
@@ -20,5 +33,5 @@ public:
         }
         std::reverse(v.begin(), v.end());
         return v;
-    }
+    }*/
 };

@@ -4,11 +4,14 @@
 class Solution {
 public:
     int Fibonacci(int n) {
-        int a[2] = {0,1};
-        if (n < 2)
-            return a[n];
-        for (int i = 2; i <= n; i++)
-            a[i % 2] = a[0] + a[1];
-        return a[n % 2];
+        if (n <= 0) return 0;
+        if (n <= 1) return 1;
+        int a[2] = {1, 1};
+        for (int i = 3; i <= n; ++i) {
+            int temp = a[0] + a[1];
+            a[0] = a[1];
+            a[1] = temp;
+        }
+        return a[1];
     }
 };
