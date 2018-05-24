@@ -1,18 +1,17 @@
+// 34ms 74.89%
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        using size_t = decltype(s.size());
-        size_t maxlen = 0;
-        size_t iLow = 0;  // 子串左边界
-        unordered_map<char, size_t> um;  // 字符 => 字符最近出现的位置
-        for (int i = 0; i < s.size(); ++i) {  // s[iLow..i)为子串
+        int start = 0, maxlen = 0;
+        vector<int> hash(256, -1);  // 用数组模拟hashmap，使用带符号int表示下标从而方便判断是否下标在内
+        for (int i = 0; i < s.size(); ++i) {  // s[start..i)为子串
             char ch = s[i];
-            if (um.find(ch) != um.end() && um[ch] >= iLow) {  // ch在子串中出现过
-                maxlen = max(maxlen, i - iLow);
-                iLow = um[ch] + 1;
+            if (hash[ch] >= start) {  // ch在子串中出现过
+                maxlen = max(maxlen, i - start);
+                start = hash[ch] + 1;
             }
-            um[ch] = i;
-        }  // 子串s[iLow, s.size())还未比较
-        return static_cast<int>(max(maxlen, s.size() - iLow));
+            hash[ch] = i;
+        }  // 子串s[start..s.size())还未比较
+        return max(maxlen, static_cast<int>(s.size() - start));
     }
 };
