@@ -1,3 +1,4 @@
+// 17ms 71.19%
 class Solution {
 public:
     // 定义中间若干个相同字符看成回文串的中心，比如"abcxxxcba"的中心是xxx
