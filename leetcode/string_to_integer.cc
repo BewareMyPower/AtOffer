@@ -1,3 +1,5 @@
+#include "common.h"
+
 // 20ms 48.18%
 int myAtoi(char* str) {
     while (*str == ' ') ++str;  // 去除首部空格

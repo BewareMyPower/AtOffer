@@ -1,3 +1,5 @@
+#include "common.h"
+
 /**
  * Given a binary tree, find its minimum depth.
  * The minimum depth is the number of nodes along the shortest path

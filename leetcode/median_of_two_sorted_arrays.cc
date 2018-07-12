@@ -1,3 +1,5 @@
+#include "common.h"
+
 class Solution {
 public:
     // 参考: https://blog.csdn.net/hk2291976/article/details/51107778

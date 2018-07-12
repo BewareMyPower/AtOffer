@@ -1,3 +1,5 @@
+#include "common.h"
+
 // 9ms 51.87
 class Solution {
 public:
